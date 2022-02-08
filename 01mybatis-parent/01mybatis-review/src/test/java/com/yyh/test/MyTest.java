@@ -10,6 +10,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.InputStream;
+import java.util.Date;
 
 public class MyTest {
 
@@ -26,8 +27,20 @@ public class MyTest {
 
     @Test
     public void testFindUserById() {
-        UserDao dao = new UserDaoImpl(sqlSessionFactory);
-        User user = dao.findUserById(1);
+        UserDao userDao = new UserDaoImpl(sqlSessionFactory);
+        User user = userDao.findUserById(1);
         System.out.println(user);
+    }
+
+    @Test
+    public void testInsertUser() {
+        UserDao userDao = new UserDaoImpl(sqlSessionFactory);
+        User user = new User();
+        user.setUsername("user");
+        user.setBirthday(new Date());
+        user.setSex("女");
+        user.setAddress("阳春市");
+        userDao.insertUser(user);
+        System.out.println(user.getId());
     }
 }
