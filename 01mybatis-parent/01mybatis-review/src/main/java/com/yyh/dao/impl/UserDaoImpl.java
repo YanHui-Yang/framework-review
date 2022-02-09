@@ -1,6 +1,7 @@
 package com.yyh.dao.impl;
 
 import com.yyh.dao.UserDao;
+import com.yyh.pojo.Order;
 import com.yyh.pojo.User;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -39,5 +40,29 @@ public class UserDaoImpl implements UserDao {
             sqlSession.close();
         }
         return insert;
+    }
+
+    @Override
+    public Order findOrdersAndUser(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        Order order = null;
+        try {
+            order = sqlSession.selectOne("com.yyh.dao.UserDao.findOrdersAndUser", id);
+        } finally {
+            sqlSession.close();
+        }
+        return order;
+    }
+
+    @Override
+    public User findUserAndOrder(int id) {
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+        User user = null;
+        try {
+            user = sqlSession.selectOne("com.yyh.dao.UserDao.findUserAndOrder", id);
+        } finally {
+            sqlSession.close();
+        }
+        return user;
     }
 }

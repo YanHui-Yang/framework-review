@@ -2,6 +2,7 @@ package com.yyh.test;
 
 import com.yyh.dao.UserDao;
 import com.yyh.dao.impl.UserDaoImpl;
+import com.yyh.pojo.Order;
 import com.yyh.pojo.User;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -42,5 +43,19 @@ public class MyTest {
         user.setAddress("阳春市");
         userDao.insertUser(user);
         System.out.println(user.getId());
+    }
+
+    @Test
+    public void testFindOrdersAndUser() {
+        UserDao userDao = new UserDaoImpl(sqlSessionFactory);
+        Order order = userDao.findOrdersAndUser(1);
+        System.out.println(order);
+    }
+
+    @Test
+    public void testFindUserAndOrder() {
+        UserDao userDao = new UserDaoImpl(sqlSessionFactory);
+        User user = userDao.findUserAndOrder(1);
+        System.out.println(user);
     }
 }
